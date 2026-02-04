@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>For Santibala 💗</title>
+  <meta name="theme-color" content="#ff4d7d" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800;900&family=Pacifico&family=Patrick+Hand&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Ambient floating hearts -->
+  <div id="floatLayer" class="float-layer" aria-hidden="true"></div>
+
+  <!-- Live emoji trail layer -->
+  <div id="trailLayer" class="trail-layer" aria-hidden="true"></div>
+
+  <!-- Soft glow blobs -->
+  <div class="blob blob-a" aria-hidden="true"></div>
+  <div class="blob blob-b" aria-hidden="true"></div>
+
+  <!-- Top tiny watermark -->
+  <div class="watermark" aria-hidden="true">💗 Santibala</div>
+
+  <!-- PHONE FRAME -->
+  <div class="phone-frame" role="region" aria-label="Valentine Phone Frame">
+    <main class="app" role="application" aria-label="Valentine Surprise">
+
+      <!-- PAGE: LANDING -->
+      <section id="page-landing" class="page is-active">
+        <div class="card hero">
+
+          <div class="hero-sticker">
+            <img
+              class="sticker-gif"
+              id="heroSticker"
+              src="https://media.tenor.com/0AVbKGY_MxMAAAAi/bear-hug.gif"
+              alt="cute hug sticker"
+              loading="eager"
+            />
+            <div class="sticker-sparkles" aria-hidden="true">
+              <span>✨</span><span>💗</span><span>✨</span>
+            </div>
+          </div>
+
+          <h1 class="hero-title">
+            <span id="askLine">Will you be my Valentine,</span>
+            <span class="accent" id="nameLine">Santibala</span><span id="askEmoji">? 🥺💗</span>
+          </h1>
+
+          <p class="hero-sub" id="subLine">
+            I made this little world for you…<br/>
+            (Tap gently, it’s full of cute surprises 🧸✨)
+          </p>
+
+          <div class="btn-row btn-wrap" id="landingBtnWrap">
+            <button id="btnNo" class="btn ghost" type="button">No 😢</button>
+            <button id="btnYes" class="btn primary" type="button">Yes 💗</button>
+          </div>
+
+          <div class="tiny-note" id="tinyNote">
+            Tip: try pressing “No” 😼 (it becomes shy)
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: HUB -->
+      <section id="page-hub" class="page">
+        <div class="card hub">
+          <div class="hub-top">
+            <div class="hub-badge">💌</div>
+            <h2 class="hub-title">Something for You</h2>
+            <p class="hub-sub">
+              Open them serial-wise… one by one 😚💗
+            </p>
+          </div>
+
+          <div class="gift-grid">
+            <button class="gift" id="gift1" data-gift="1" type="button">
+              <div class="gift-ico wiggle">🎁</div>
+              <div class="gift-meta">
+                <div class="gift-name">Gift 1</div>
+                <div class="gift-desc">Cute teasing quiz</div>
+              </div>
+              <div class="gift-pill" id="pill1">Locked</div>
+            </button>
+
+            <button class="gift" id="gift2" data-gift="2" type="button">
+              <div class="gift-ico bob">💌</div>
+              <div class="gift-meta">
+                <div class="gift-name">Gift 2</div>
+                <div class="gift-desc">Handwritten love letter</div>
+              </div>
+              <div class="gift-pill" id="pill2">Locked</div>
+            </button>
+
+            <button class="gift" id="gift3" data-gift="3" type="button">
+              <div class="gift-ico wiggle2">🧿</div>
+              <div class="gift-meta">
+                <div class="gift-name">Gift 3</div>
+                <div class="gift-desc">6 memories + final</div>
+              </div>
+              <div class="gift-pill" id="pill3">Locked</div>
+            </button>
+          </div>
+
+          <div class="hub-actions">
+            <button id="btnFinal" class="btn danger full" type="button" disabled>
+              FINALLY.. &gt;
+            </button>
+
+            <!-- keep btnHome in DOM to avoid JS error; hidden -->
+            <button id="btnHome" class="btn ghost full" type="button" style="display:none" aria-hidden="true" tabindex="-1">
+              Back Home 🏠
+            </button>
+          </div>
+
+          <p class="tiny-note">
+            If you click a locked gift, it will tease you cutely 😼💗
+          </p>
+        </div>
+      </section>
+
+      <!-- PAGE: GIFT 1 -->
+      <section id="page-gift1" class="page">
+        <div class="card">
+          <div class="page-top">
+            <div class="page-badge">🧸</div>
+            <h2 class="page-title">Quiz for you ☺️</h2>
+            <p class="page-sub">
+              Answer carefully… (the correct one is always the last 😼💗)
+            </p>
+          </div>
+
+          <div id="quizArea" class="quiz-area" aria-live="polite"></div>
+
+          <div class="nav-row">
+            <!-- keep backHub in DOM to avoid JS error; hidden -->
+            <button class="btn ghost backHub" type="button" style="display:none" aria-hidden="true" tabindex="-1">← Back</button>
+
+            <button id="gift1Next" class="btn primary full" type="button" disabled>
+              Open Gift 2 →
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: GIFT 2 -->
+      <section id="page-gift2" class="page">
+        <div class="card">
+          <div class="page-top">
+            <div class="page-badge">💌</div>
+            <h2 class="page-title">A Letter For You 🥺</h2>
+            <p class="page-sub">
+              It writes like I’m writing it live… 😚✨
+            </p>
+          </div>
+
+          <div class="paper">
+            <div class="paper-tape tape-a" aria-hidden="true"></div>
+            <div class="paper-tape tape-b" aria-hidden="true"></div>
+
+            <div class="paper-inner">
+              <div class="paper-header">
+                <img class="mini-sticker"
+                     src="https://media.tenor.com/0AVbKGY_MxMAAAAi/bear-hug.gif"
+                     alt="hug"
+                     loading="lazy" />
+                <div class="paper-heart" aria-hidden="true">💗</div>
+              </div>
+
+              <div class="letter-title">Dear Santibala,</div>
+
+              <div class="letter-body">
+                <p id="letterText" class="hand"></p>
+                <div class="type-caret" id="caret" aria-hidden="true"></div>
+              </div>
+
+              <div class="letter-footer">
+                <div class="hand-sign">— Yours Suresh 💞</div>
+                <div class="doodle" aria-hidden="true">✍️</div>
+              </div>
+            </div>
+
+            <div class="paper-sparkle" aria-hidden="true">
+              <span>✨</span><span>✨</span><span>💗</span><span>✨</span>
+            </div>
+          </div>
+
+          <div class="nav-row">
+            <!-- keep backHub in DOM to avoid JS error; hidden -->
+            <button class="btn ghost backHub" type="button" style="display:none" aria-hidden="true" tabindex="-1">← Back</button>
+
+            <!-- IMPORTANT: enabled only after typing finishes -->
+            <button id="gift2Next" class="btn primary full" type="button" disabled>
+              Open Gift 3 →
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: GIFT 3 (UPDATED: NO QUESTION / DIRECT MEMORIES) -->
+      <section id="page-gift3" class="page">
+        <div class="card">
+          <div class="page-top">
+            <div class="page-badge">🧿</div>
+            <h2 class="page-title">Look at this cutie 😭</h2>
+            <p class="page-sub">
+              6 memories… then final 😚💗
+            </p>
+          </div>
+
+          <!-- Keep lockCard in DOM (JS hides it), but it's hidden by default -->
+          <div class="lock-card" id="lockCard" style="display:none">
+            <div class="lock-q">Pick the true one 😼</div>
+            <div class="lock-opts">
+              <button class="btn ghost optWrong" type="button">I will forget you 🙃</button>
+              <button class="btn ghost optWrong" type="button">I will be rude 😤</button>
+              <button id="optRight" class="btn primary" type="button">I will always choose you 💗</button>
+            </div>
+            <div class="lock-hint" id="lockHint">Tap the right one 😚</div>
+          </div>
+
+          <!-- Now memories are shown directly -->
+          <div id="memories" class="memories">
+            <div class="grid">
+              <figure class="pol">
+                <img src="assets/photos/p1.jpeg" alt="memory 1" />
+                <figcaption>Sweet Hello 💗</figcaption>
+              </figure>
+              <figure class="pol">
+                <img src="assets/photos/p2.jpeg" alt="memory 2" />
+                <figcaption>True Smile 😊</figcaption>
+              </figure>
+              <figure class="pol">
+                <img src="assets/photos/p3.jpeg" alt="memory 3" />
+                <figcaption>Perfect Day 🌸</figcaption>
+              </figure>
+              <figure class="pol">
+                <img src="assets/photos/p4.jpeg" alt="memory 4" />
+                <figcaption>My Home 🏡💗</figcaption>
+              </figure>
+              <figure class="pol">
+                <img src="assets/photos/p5.jpeg" alt="memory 5" />
+                <figcaption>Only Us 🥺</figcaption>
+              </figure>
+              <figure class="pol">
+                <img src="assets/photos/p6.jpeg" alt="memory 6" />
+                <figcaption>Forever Us 🧿❤️</figcaption>
+              </figure>
+            </div>
+
+            <div class="cute-lines" aria-hidden="true">
+              <span>💗 sweet</span>
+              <span>🧿 safe</span>
+              <span>✨ special</span>
+              <span>🫶 home</span>
+            </div>
+
+            <div class="nav-row">
+              <!-- keep backHub in DOM to avoid JS error; hidden -->
+              <button class="btn ghost backHub" type="button" style="display:none" aria-hidden="true" tabindex="-1">← Back</button>
+
+              <!-- FINAL button right below the frame -->
+              <button id="gift3Next" class="btn danger full" type="button">
+                Go to Final →
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: FINAL (UPDATED: HORIZONTAL ROLL) -->
+      <section id="page-final" class="page">
+        <div class="final-card">
+          <div class="final-top">
+            <div class="final-title">You are my forever 🧿❤️!</div>
+            <div class="final-sub">My love… this is for you 💗</div>
+          </div>
+
+          <div class="strip-window" aria-label="Auto scrolling photos">
+            <div class="strip" id="strip"></div>
+          </div>
+
+          <div class="love-lines">
+            <div class="line" id="loveLine">You are my favorite feeling 💗</div>
+            <div class="line-sub">— always, always, always</div>
+          </div>
+
+          <div class="final-actions">
+            <button id="btnRestart" class="btn primary" type="button">Restart 🔁</button>
+
+            <!-- keep btnExit in DOM to avoid JS error; hidden -->
+            <button id="btnExit" class="btn ghost" type="button" style="display:none" aria-hidden="true" tabindex="-1">
+              Back Home 🏠
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- MODAL -->
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-bg" id="modalBg" aria-hidden="true"></div>
+    <div class="modal-box" role="document">
+      <div class="modal-sticker">
+        <img class="sticker-gif small"
+             src="https://media.tenor.com/0AVbKGY_MxMAAAAi/bear-hug.gif" alt="hug" />
+      </div>
+      <div class="modal-title" id="mTitle">Title</div>
+      <div class="modal-text" id="mText">Text</div>
+      <div class="modal-actions">
+        <button id="mPrimary" class="btn primary" type="button">Okay 💗</button>
+        <button id="mSecondary" class="btn ghost" type="button">Close 🙈</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image viewer (tap photo to zoom) -->
+  <div id="viewer" class="viewer hidden" role="dialog" aria-modal="true">
+    <div class="viewer-bg" id="viewerBg" aria-hidden="true"></div>
+    <div class="viewer-box" role="document">
+      <img id="viewerImg" alt="photo preview" />
+      <button id="viewerClose" class="btn ghost viewer-close" type="button">Close ✨</button>
+    </div>
+  </div>
+
+  <!-- Emoji burst layer -->
+  <div id="burstLayer" class="burst-layer" aria-hidden="true"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+
