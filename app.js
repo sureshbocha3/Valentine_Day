@@ -4,7 +4,8 @@
    Mobile phone-frame + serial only
 
    UPDATE (Your request):
-   ✅ ALWAYS start from LANDING when link opens / refresh / reopen / back after time
+   ✅ ALWAYS start from LANDING when link opens / refresh / reopen
+   ✅ Back/Forward (Safari iOS BFCache) also forces LANDING
    ✅ After 10 minutes idle, auto reset to LANDING
    ✅ No "resume where left off" anymore
 
@@ -72,7 +73,7 @@ function loadState(){
 function saveState(s){ localStorage.setItem(STORE_KEY, JSON.stringify(s)); }
 function resetState(){ localStorage.removeItem(STORE_KEY); }
 
-/* ============ NEW: Force Fresh Start + 10 min timeout ============ */
+/* ============ Force Fresh Start + 10 min timeout ============ */
 const SESSION_KEY = "santibala_session_started_at";
 const SESSION_TIMEOUT_MS = 10 * 60 * 1000; // 10 minutes
 
@@ -140,6 +141,24 @@ function bumpSession(){
 }
 ["pointerdown","click","keydown","scroll","touchstart"].forEach(ev => {
   window.addEventListener(ev, bumpSession, { passive:true });
+});
+
+// ✅ Safari/iOS back/forward cache fix (BFCache)
+// When user returns using Back button, page may not reload, so boot() won't run.
+// pageshow with persisted=true means restored from BFCache.
+window.addEventListener("pageshow", (e) => {
+  if(e.persisted){
+    markSessionStart();
+    fullResetToLanding();
+  }
+});
+
+// ✅ If tab becomes visible again after long time, enforce timeout reset
+document.addEventListener("visibilitychange", () => {
+  if(document.visibilityState === "visible" && sessionExpired()){
+    markSessionStart();
+    fullResetToLanding();
+  }
 });
 /* ================================================================ */
 
@@ -788,8 +807,8 @@ setInterval(() => {
 const btnRestart = $("#btnRestart");
 btnRestart?.addEventListener("click", (e) => {
   addRipple(btnRestart, e);
-  markSessionStart();        // NEW: restart timer
-  fullResetToLanding();      // NEW: single reset function
+  markSessionStart();        // restart timer baseline
+  fullResetToLanding();      // hard reset
 });
 
 /* Viewer */
@@ -815,16 +834,11 @@ viewerClose?.addEventListener("click", (e) => { addRipple(viewerClose, e); close
 function boot(){
   spawnFloating();
 
-  // ✅ ALWAYS start from landing (fresh)
-  // If user comes back after 10 min, it also resets automatically
-  if(sessionExpired()){
-    markSessionStart();
-  }else{
-    // still treat as fresh open because you want ALWAYS landing
-    markSessionStart();
-  }
+  // ✅ ALWAYS start fresh at landing on open/refresh
+  markSessionStart();
+  fullResetToLanding();
 
-  fullResetToLanding();       // ALWAYS landing + clears localStorage
+  // ✅ Auto reset after 10 minutes idle
   startSessionTimeoutWatcher();
 }
 
